@@ -35,8 +35,8 @@ question = st.text_input("Enter your question here:")
 
 if question:
     # Retrieve relevant documents from the FAISS vector store
-    results = db.similarity_search_with_score(question, k=10)
-    relevant_docs = [doc for doc, score in results if score < 0.5]
+    results = db.similarity_search_with_score(question, k=3)
+    relevant_docs = [doc for doc, score in results]
 
     # Convert documents to text
     context = "\n\n".join([doc.page_content for doc in relevant_docs])
@@ -49,8 +49,8 @@ if question:
     
     st.write("Answer:")
     # Display the retrieved documents and the generated answer
-    for doc,score in results:
-        st.write("Score:", score)
-        st.write(doc.page_content[:300])
-        st.write("---")
+    # for doc,score in results:
+    #     st.write("Score:", score)
+    #     st.write(doc.page_content[:300])
+    #     st.write("---")
     st.write(answer)
